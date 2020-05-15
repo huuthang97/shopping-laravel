@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('title', 'Product')
 
+@section('js')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="{{ asset('admins\product\index\index.js') }}"></script>
+@endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -40,7 +45,7 @@
                       
                       <td>
                         <a class="btn btn-default" href="{{ route('products.edit', ['id' => $product->id]) }}" type="button">Sửa</a>
-                        <a class="btn btn-danger"  href="{{ route('products.delete', ['id' => $product->id]) }}" type="button">Xóa</a>
+                        <a class="btn btn-danger delete-action"  href="{{ route('products.delete', ['id' => $product->id]) }}" type="button">Xóa</a>
                       </td>
                     </tr>    
                   @endforeach

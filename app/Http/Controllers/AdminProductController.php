@@ -143,6 +143,19 @@ class AdminProductController extends Controller
           }
     }
 
-    
+    public function delete($id) {
+        
+        try {
+            if ($this->product->find($id)->delete()) {
+                return response()->json([
+                    'code' => 200,
+                    'message' => 'success'
+                ], 200);
+            }
+        }
+        catch (\Exception $e) {
+            dd($e->getMessage().'  -- File: '. $e->getFile().' ---Line: '. $e->getFile());
+        }
+    }
 
 }
