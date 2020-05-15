@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductAddRequest;
 use App\Components\Recusive;
 use App\Category;
 use App\Product;
@@ -38,7 +39,7 @@ class AdminProductController extends Controller
         return view('admin.product.add', compact('htmlOption'));
     }
 
-    public function store(Request $request) {
+    public function store(ProductAddRequest $request) {
         try {
             // DB::beginTransaction();
             // Create Product
