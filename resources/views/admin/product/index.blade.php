@@ -39,8 +39,8 @@
                       <td>{{ $product->category->name }}</td>
                       
                       <td>
-                        <a class="btn btn-default" href="{{ route('categories.edit', ['id' => $product->id]) }}" type="button">Sửa</a>
-                        <a class="btn btn-danger"  href="{{ route('categories.delete', ['id' => $product->id]) }}" type="button">Xóa</a>
+                        <a class="btn btn-default" href="{{ route('products.edit', ['id' => $product->id]) }}" type="button">Sửa</a>
+                        <a class="btn btn-danger"  href="{{ route('products.delete', ['id' => $product->id]) }}" type="button">Xóa</a>
                       </td>
                     </tr>    
                   @endforeach

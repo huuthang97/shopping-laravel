@@ -13,7 +13,7 @@ class Product extends Model
         return $this->hasMany('App\ProductImage', 'product_id', 'id');
     }
 
-    public function Tags()
+    public function tags()
     {
         return $this->belongsToMany('App\Tag', 'product_tags', 'product_id', 'tag_id')->withTimestamps();
     }
