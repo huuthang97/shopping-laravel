@@ -22,8 +22,9 @@ class AdminProductController extends Controller
         $this->product = $product;
         $this->tag = $tag;
     }
-    public function index() { 
-        return view('admin.product.index');
+    public function index() {
+        $products = $this->product->latest()->paginate(5);
+        return view('admin.product.index', compact('products'));
     }
 
     public function create() {
@@ -74,11 +75,11 @@ class AdminProductController extends Controller
                 }
                 // DB::commit();
 
-                return view('admin.product.index');
+                return redirect()->route('products.index');
 
           } catch(\Exception $e){ 
             // DB::rollBack();
-            dd($e->getMessage().'Line: ' . $e->getLine()); 
+            dd($e->getMessage() . '----File: ' . $e->getFile() .'----Line: ' . $e->getLine()); 
             
           }
         

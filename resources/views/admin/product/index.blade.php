@@ -28,21 +28,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- @foreach ($categories as $category)
+                  @foreach ($products as $product)
                     <tr>
-                      <th scope="row">{{ $category->id }}</th>
-                      <td>{{ $category->name }}</td>
+                      <th scope="row">{{ $product->id }}</th>
+                      <td>{{ $product->name }}</td>
+                      <td>{{ $product->price }}</td>
                       <td>
-                        <a class="btn btn-default" href="{{ route('categories.edit', ['id' => $category->id]) }}" type="button">Sửa</a>
-                        <a class="btn btn-danger"  href="{{ route('categories.delete', ['id' => $category->id]) }}" type="button">Xóa</a>
+                        <img class="img-fluid" src="{{ asset($product->feature_image_path) }}" alt="" width="100" height="auto">
+                        </td>
+                      <td>{{ $product->category->name }}</td>
+                      
+                      <td>
+                        <a class="btn btn-default" href="{{ route('categories.edit', ['id' => $product->id]) }}" type="button">Sửa</a>
+                        <a class="btn btn-danger"  href="{{ route('categories.delete', ['id' => $product->id]) }}" type="button">Xóa</a>
                       </td>
                     </tr>    
-                  @endforeach --}}
+                  @endforeach
                 </tbody>
               </table>
             </div>
             <div class="col-md-12">
-              {{-- {{ $categories->links() }} --}}
+              {{ $products->links() }}
 
             </div>
           </div>
