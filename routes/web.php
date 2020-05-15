@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('admin/login', 'AdminController@login');
 Route::post('admin/login', 'AdminController@postLogin');
 
-Route::get('/home', function () {
+Route::get('admin/home', function () {
     return view('home');
 });
 
@@ -88,5 +88,36 @@ Route::group(['prefix' => 'admin'], function () {
             'as' => 'menus.delete',
             'uses' => 'MenuController@delete'
         ]);
+    });
+    route::prefix('products')->group(function () {
+        Route::get('/', [
+            'as' => 'products.index',
+            'uses' => 'AdminProductController@index'
+        ]);
+    
+        Route::get('/create', [
+            'as' => 'products.create',
+            'uses' => 'AdminProductController@create'
+        ]);
+    
+        Route::post('/store', [
+            'as' => 'products.store',
+            'uses' => 'AdminProductController@store'
+        ]);
+    
+        // Route::get('/edit/{id}', [
+        //     'as' => 'menus.edit',
+        //     'uses' => 'MenuController@edit'
+        // ]);
+    
+        // Route::post('/update/{id}', [
+        //     'as' => 'menus.update',
+        //     'uses' => 'MenuController@update'
+        // ]);
+    
+        // Route::get('/delete/{id}', [
+        //     'as' => 'menus.delete',
+        //     'uses' => 'MenuController@delete'
+        // ]);
     });
 });
