@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('title', 'Slider')
+@section('title', 'Settings')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      @include('partials.content-header',  ['name' => 'Slider', 'key' => 'Add'])
+      @include('partials.content-header',  ['name' => 'Setting', 'key' => 'Edit'])
       <!-- /.content-header -->
 
       <!-- Main content -->
@@ -24,24 +24,22 @@
               @endif
             </div>
             <div class="col-md-6">
-              <form action="{{ route('sliders.update', ['id' => $slider->id]) }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('settings.update', ['id' => $setting->id]) . '?type=' . request()->type}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                  <label for="">Tên slider</label>
+                  <label for="">Config key</label>
                   <input type="text"
-                    class="form-control" name="name" placeholder="Nhập tên slider" value="{{ $slider->name }}">
+                    class="form-control" name="config_key" placeholder="Nhập tên config key" value="{{ $setting->config_key }}">
                 </div>
                 <div class="form-group">
-                  <label for="">Mô tả slider</label>
-                  <textarea name="des" class="form-control"  rows="4">{{ $slider->description }}</textarea>
-                </div>
-                <div class="form-group">
-                  <label for="">Ảnh</label>
-                  <input type="file"
-                    class="form-control-file" name="photo">
-                  <div class="mt-3">
-                    <img src="{{ asset($slider->image_path) }}" width="100">
-                  </div>
+                  <label for="">Config value</label>
+                  @if (request()->type === 'textarea')
+                    <textarea name="config_value" class="form-control"  rows="4">{{ $setting->config_value }}  </textarea>
+                  @else
+                    <input type="text" class="form-control" name="config_value" 
+                     value="{{ $setting->config_value }}">
+                  @endif
+                  
                 </div>
                 <button type="submit" class="btn btn-success">Lưu</button>
               </form>

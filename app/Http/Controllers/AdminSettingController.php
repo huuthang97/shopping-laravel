@@ -17,7 +17,8 @@ class AdminSettingController extends Controller
     }
 
     public function index() {
-        return view('admin.setting.index');
+        $settings = $this->setting->latest()->paginate(5);
+        return view('admin.setting.index', compact('settings'));
     }
 
     public function create() {
@@ -25,21 +26,39 @@ class AdminSettingController extends Controller
     }
 
     public function store(SettingAddRequest $request) {
-        $dataInsert = [
-            'config_key' => $request->config_key,
-            'config_value' => $request->config_value,
-            'type' => $request->type,
-        ];
-        $this->setting->create($dataInsert);
-        return redirect()->route('settings.index');
+        try {
+            $dataInsert = [
+                'config_key' => $request->config_key,
+                'config_value' => $request->config_value,
+                'type' => $request->type,
+            ];
+            $this->setting->create($dataInsert);
+            return redirect()->route('settings.index');
+        }
+        catch (\Exception $e) {
+            dd('Mesage: ' . $e->getMessage() . '  --File: ' . $e->getFile() . '  --Line: ' . $e->getLine());
+        }
+        
     }
 
-    public function edit($id) {
-
+    public function edit(Request $request, $id) {
+        $setting = $this->setting->find($id);
+        return view('admin.setting.edit', compact('setting'));
+        
     }
 
-    public function update($id) {
-
+    public function update(SettingAddRequest $request, $id) {
+        try {
+            $dataUpdate = [
+                'config_key' => $request->config_key,
+                'config_value' => $request->config_value,
+            ];
+            $this->setting->find($id)->update($dataUpdate);
+            return redirect()->route('settings.index');
+        }
+        catch (\Exception $e) {
+            dd('Mesage: ' . $e->getMessage() . '  --File: ' . $e->getFile() . '  --Line: ' . $e->getLine());
+        }
     }
 
     public function delete($id) {

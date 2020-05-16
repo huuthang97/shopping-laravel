@@ -34,32 +34,30 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tên Slider</th>
-                    <th scope="col">Hình ảnh</th>
-                    <th scope="col">Mô tả</th>
+                    <th scope="col">Config key</th>
+                    <th scope="col">Config value</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                   {{-- @foreach ($sliders as $slider)
+                   @foreach ($settings as $setting)
                     <tr>
-                      <th scope="row">{{ $slider->id }}</th>
-                      <td>{{ $slider->name }}</td>
+                      <th scope="row">{{ $setting->id }}</th>
+                      <td>{{ $setting->config_key }}</td>
+                      <td>{{ $setting->config_value }}</td>
+                      <td>{{ $setting->type }}</td>
                       <td>
-                        <img src="{{ asset($slider->image_path) }}" width="100">
-                      </td>
-                      <td>{{ $slider->description }}</td>
-                      <td>
-                        <a class="btn btn-default" href="{{ route('sliders.edit', ['id' => $slider->id]) }}" type="button">Sửa</a>
-                        <a class="btn btn-danger delete-action"  href="{{ route('sliders.delete', ['id' => $slider->id]) }}" type="button">Xóa</a>
+                        <a class="btn btn-default" href="{{ route('settings.edit', ['id' => $setting->id]) . '?type=' . $setting->type }}" type="button">Sửa</a>
+                        <a class="btn btn-danger delete-action"  href="{{ route('settings.delete', ['id' => $setting->id]) }}" type="button">Xóa</a>
                       </td>
                     </tr>    
-                  @endforeach  --}}
+                  @endforeach 
                 </tbody>
               </table>
             </div>
             <div class="col-md-12">
-               {{-- {{ $sliders->links() }}  --}}
+               {{ $settings->links() }} 
 
             </div>
           </div>
