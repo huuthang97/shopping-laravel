@@ -33,8 +33,7 @@
                 </div>
                 <div class="form-group">
                   <label for="">Mô tả slider</label>
-                  <input type="text"
-                    class="form-control" name="des" placeholder="Nhập mô tả" value="{{ old('des') }}">
+                  <textarea name="des" class="form-control"  rows="4">{{ old('des') }}</textarea>
                 </div>
                 <div class="form-group">
                   <label for="">Ảnh</label>

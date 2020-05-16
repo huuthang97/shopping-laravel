@@ -24,7 +24,7 @@ class SliderAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:sliders',
+            'name' => 'required',
             'des' => 'required',
         ];
     }

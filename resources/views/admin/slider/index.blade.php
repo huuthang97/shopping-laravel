@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('title', 'Slider')
+@section('title', 'Slider Edit')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      @include('partials.content-header', ['name'=>'Slider', 'key'=>'List'])
+      @include('partials.content-header', ['name'=>'Slider', 'key'=>'Edit'])
       <!-- /.content-header -->
 
       <!-- Main content -->
@@ -20,26 +20,32 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tên danh mục</th>
+                    <th scope="col">Tên Slider</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Mô tả</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{--  @foreach ($categories as $category)
+                   @foreach ($sliders as $slider)
                     <tr>
-                      <th scope="row">{{ $category->id }}</th>
-                      <td>{{ $category->name }}</td>
+                      <th scope="row">{{ $slider->id }}</th>
+                      <td>{{ $slider->name }}</td>
                       <td>
-                        <a class="btn btn-default" href="{{ route('categories.edit', ['id' => $category->id]) }}" type="button">Sửa</a>
-                        <a class="btn btn-danger"  href="{{ route('categories.delete', ['id' => $category->id]) }}" type="button">Xóa</a>
+                        <img src="{{ asset($slider->image_path) }}" width="100">
+                      </td>
+                      <td>{{ $slider->description }}</td>
+                      <td>
+                        <a class="btn btn-default" href="{{ route('sliders.edit', ['id' => $slider->id]) }}" type="button">Sửa</a>
+                        <a class="btn btn-danger"  href="{{ route('sliders.delete', ['id' => $slider->id]) }}" type="button">Xóa</a>
                       </td>
                     </tr>    
-                  @endforeach  --}}
+                  @endforeach 
                 </tbody>
               </table>
             </div>
             <div class="col-md-12">
-              {{--  {{ $sliders->links() }}  --}}
+               {{ $sliders->links() }} 
 
             </div>
           </div>

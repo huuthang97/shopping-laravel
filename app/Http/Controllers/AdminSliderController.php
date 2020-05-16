@@ -17,11 +17,15 @@ class AdminSliderController extends Controller
         $this->slider = $slider;
     }
     public function index() {
-        return view('admin.slider.index');
+        $sliders = $this->slider->latest()->paginate(5);
+        return view('admin.slider.index', compact('sliders'));
     }
+
     public function create() {
         return view('admin.slider.add');
     }
+
+
     public function store(SliderAddRequest $request) {
         try {
             $dataInsert = [
@@ -40,7 +44,28 @@ class AdminSliderController extends Controller
             dd('Mesage: '. $e->getMessage().' --File:  '.$e->getFile().'  --Line:   '. $e->getLine() );
         }
     }
-    public function edit() {
 
+    public function edit($id) {
+        $slider = $this->slider->find($id);
+        return view('admin.slider.edit', compact('slider'));
     }
+    public function update(SliderAddRequest $request, $id) {
+        try {
+            $dataUpdate = [
+                'name' => $request->name,
+                'description' => $request->des
+            ];
+            $fileUpload = $this->storageTraitUpload($request, 'photo', 'slider');
+            if ( !empty($fileUpload ) ) {
+                $dataUpdate['image_name'] = $fileUpload['file_name'];
+                $dataUpdate['image_path'] = $fileUpload['path'];
+            }
+            $this->slider->find($id)->update($dataUpdate);
+            return redirect()->route('sliders.index');
+        }
+        catch (\Exception $e) {
+            dd('Mesage: '. $e->getMessage().' --File:  '.$e->getFile().'  --Line:   '. $e->getLine() );
+        }
+    }
+    
 }
