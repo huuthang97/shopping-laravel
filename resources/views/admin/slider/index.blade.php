@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('title', 'Slider Edit')
 
+@section('js')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="{{ asset('admins\slider\index\index.js') }}"></script>
+@endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,7 +42,7 @@
                       <td>{{ $slider->description }}</td>
                       <td>
                         <a class="btn btn-default" href="{{ route('sliders.edit', ['id' => $slider->id]) }}" type="button">Sửa</a>
-                        <a class="btn btn-danger"  href="{{ route('sliders.delete', ['id' => $slider->id]) }}" type="button">Xóa</a>
+                        <a class="btn btn-danger delete-action"  href="{{ route('sliders.delete', ['id' => $slider->id]) }}" type="button">Xóa</a>
                       </td>
                     </tr>    
                   @endforeach 

@@ -49,6 +49,7 @@ class AdminSliderController extends Controller
         $slider = $this->slider->find($id);
         return view('admin.slider.edit', compact('slider'));
     }
+
     public function update(SliderAddRequest $request, $id) {
         try {
             $dataUpdate = [
@@ -62,6 +63,20 @@ class AdminSliderController extends Controller
             }
             $this->slider->find($id)->update($dataUpdate);
             return redirect()->route('sliders.index');
+        }
+        catch (\Exception $e) {
+            dd('Mesage: '. $e->getMessage().' --File:  '.$e->getFile().'  --Line:   '. $e->getLine() );
+        }
+    }
+
+    public function delete($id) {
+        try {
+            if ( $this->slider->find($id)->delete() ) {
+                return response()->json([
+                    'code' => 200,
+                    'mesage' => 'success'
+                ], 200);
+            }
         }
         catch (\Exception $e) {
             dd('Mesage: '. $e->getMessage().' --File:  '.$e->getFile().'  --Line:   '. $e->getLine() );
