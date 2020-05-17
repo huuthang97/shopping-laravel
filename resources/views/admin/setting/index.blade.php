@@ -49,7 +49,7 @@
                       <td>{{ $setting->type }}</td>
                       <td>
                         <a class="btn btn-default" href="{{ route('settings.edit', ['id' => $setting->id]) . '?type=' . $setting->type }}" type="button">Sửa</a>
-                        <a class="btn btn-danger delete-action"  href="{{ route('settings.delete', ['id' => $setting->id]) }}" type="button">Xóa</a>
+                        <a class="btn btn-danger delete-action"  href="{{ route('settings.delete', ['id' => $setting->id])}}" type="button">Xóa</a>
                       </td>
                     </tr>    
                   @endforeach 
