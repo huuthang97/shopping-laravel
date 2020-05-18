@@ -121,6 +121,7 @@ Route::group(['prefix' => 'admin'], function () {
             'uses' => 'AdminProductController@delete'
         ]);
     });
+
     route::prefix('sliders')->group(function () {
         Route::get('/', [
             'as' => 'sliders.index',
@@ -152,6 +153,7 @@ Route::group(['prefix' => 'admin'], function () {
             'uses' => 'AdminSliderController@delete'
         ]);
     });
+
     route::prefix('settings')->group(function () {
         Route::get('/', [
             'as' => 'settings.index',
@@ -183,4 +185,68 @@ Route::group(['prefix' => 'admin'], function () {
             'uses' => 'AdminSettingController@delete'
         ]);
     });
+
+    route::prefix('users')->group(function () {
+        Route::get('/', [
+            'as' => 'users.index',
+            'uses' => 'AdminUserController@index'
+        ]);
+    
+        Route::get('/create', [
+            'as' => 'users.create',
+            'uses' => 'AdminUserController@create'
+        ]);
+    
+        Route::post('/store', [
+            'as' => 'users.store',
+            'uses' => 'AdminUserController@store'
+        ]);
+    
+        Route::get('/edit/{id}', [
+            'as' => 'users.edit',
+            'uses' => 'AdminUserController@edit'
+        ]);
+    
+        Route::post('/update/{id}', [
+            'as' => 'users.update',
+            'uses' => 'AdminUserController@update'
+        ]);
+    
+        Route::get('/delete/{id}', [
+            'as' => 'users.delete',
+            'uses' => 'AdminUserController@delete'
+        ]);
+    });
+    route::prefix('users')->group(function () {
+        Route::get('/', [
+            'as' => 'users.index',
+            'uses' => 'AdminUserController@index'
+        ]);
+    
+        Route::get('/create', [
+            'as' => 'users.create',
+            'uses' => 'AdminUserController@create'
+        ]);
+    
+        Route::post('/store', [
+            'as' => 'users.store',
+            'uses' => 'AdminUserController@store'
+        ]);
+    
+        Route::get('/edit/{id}', [
+            'as' => 'users.edit',
+            'uses' => 'AdminUserController@edit'
+        ]);
+    
+        Route::post('/update/{id}', [
+            'as' => 'users.update',
+            'uses' => 'AdminUserController@update'
+        ]);
+    
+        Route::get('/delete/{id}', [
+            'as' => 'users.delete',
+            'uses' => 'AdminUserController@delete'
+        ]);
+    });
+
 });
