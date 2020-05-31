@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
-Route::get('admin/login', 'AdminController@login');
+Route::get('admin/login', 'AdminController@login')->name('admin.login');
 Route::post('admin/login', 'AdminController@postLogin');
 
 Route::get('admin/home', function () {
     return view('home');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [
             'as' => 'categories.index',
@@ -217,35 +217,72 @@ Route::group(['prefix' => 'admin'], function () {
             'uses' => 'AdminUserController@delete'
         ]);
     });
-    route::prefix('users')->group(function () {
+    
+    route::prefix('roles')->group(function () {
         Route::get('/', [
-            'as' => 'users.index',
-            'uses' => 'AdminUserController@index'
+            'as' => 'roles.index',
+            'uses' => 'AdminRoleController@index',
+            'middleware' => 'can:role_view'
         ]);
     
         Route::get('/create', [
-            'as' => 'users.create',
-            'uses' => 'AdminUserController@create'
+            'as' => 'roles.create',
+            'uses' => 'AdminRoleController@create',
+            'middleware' => 'can:role_add'
         ]);
     
         Route::post('/store', [
-            'as' => 'users.store',
-            'uses' => 'AdminUserController@store'
+            'as' => 'roles.store',
+            'uses' => 'AdminRoleController@store'
         ]);
     
         Route::get('/edit/{id}', [
-            'as' => 'users.edit',
-            'uses' => 'AdminUserController@edit'
+            'as' => 'roles.edit',
+            'uses' => 'AdminRoleController@edit',
+            'middleware' => 'can:role_edit'
         ]);
     
         Route::post('/update/{id}', [
-            'as' => 'users.update',
-            'uses' => 'AdminUserController@update'
+            'as' => 'roles.update',
+            'uses' => 'AdminRoleController@update'
         ]);
     
         Route::get('/delete/{id}', [
-            'as' => 'users.delete',
-            'uses' => 'AdminUserController@delete'
+            'as' => 'roles.delete',
+            'uses' => 'AdminRoleController@delete',
+            'middleware' => 'can:role_delete'
+        ]);
+    });
+
+    route::prefix('permissions')->group(function () {
+        Route::get('/', [
+            'as' => 'permissions.index',
+            'uses' => 'AdminPermissionController@index'
+        ]);
+    
+        Route::get('/create', [
+            'as' => 'permissions.create',
+            'uses' => 'AdminPermissionController@create'
+        ]);
+    
+        Route::post('/store', [
+            'as' => 'permissions.store',
+            'uses' => 'AdminPermissionController@store'
+        ]);
+    
+        Route::get('/edit/{id}', [
+            'as' => 'permissions.edit',
+            'uses' => 'AdminPermissionController@edit'
+        ]);
+    
+        Route::post('/update/{id}', [
+            'as' => 'permissions.update',
+            'uses' => 'AdminPermissionController@update'
+        ]);
+    
+        Route::get('/delete/{id}', [
+            'as' => 'permissions.delete',
+            'uses' => 'AdminPermissionController@delete'
         ]);
     });
 

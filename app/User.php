@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -41,6 +42,18 @@ class User extends Authenticatable
 
     public function roles() {
         return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id')->withTimestamps();
+    }
+
+    public function checkPermission($module) {
+        $roles = auth()->user()->roles;
+        foreach($roles as $role) {
+            $permission = $role->permissions;
+            if ( $permission->contains('key_code', $module) ) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
 }
