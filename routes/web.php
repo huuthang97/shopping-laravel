@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('/');
 
 Route::get('admin/login', 'AdminController@login')->name('admin.login');
 Route::post('admin/login', 'AdminController@postLogin');
@@ -25,6 +25,7 @@ Route::get('admin/home', function () {
     return view('home');
 });
 
+// Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [
@@ -287,3 +288,79 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     });
 
 });
+
+// Frontent
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', [
+        'as' => 'home.index',
+        'uses' => 'Frontend\HomeController@index'
+    ]);
+});
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::get('/', [
+        'as' => 'cart.index',
+        'uses' => 'Frontend\CartController@index'
+    ]);
+    Route::get('add', [
+        'as' => 'cart.add',
+        'uses' => 'Frontend\CartController@add'
+    ]);
+
+    Route::post('postAdd', [
+        'as' => 'cart.postAdd',
+        'uses' => 'Frontend\CartController@postAdd'
+    ]);
+    Route::get('update', [
+        'as' => 'cart.update',
+        'uses' => 'Frontend\CartController@update'
+    ]);
+    Route::get('delete', [
+        'as' => 'cart.delete',
+        'uses' => 'Frontend\CartController@delete'
+    ]);
+    Route::get('checkout', [
+        'as' => 'cart.checkout',
+        'uses' => 'Frontend\CartController@getCheckout'
+    ]);
+    Route::post('checkout', [
+        'as' => 'cart.checkout',
+        'uses' => 'Frontend\CartController@postCheckout'
+    ]);
+});
+
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/{slug}/{id}', [
+        'as' => 'category.index',
+        'uses' => 'Frontend\CategoryController@index'
+    ]);
+});
+
+Route::get('product-detail/{slug}/{id}', [
+    'as' => 'product.detail',
+    'uses' => 'Frontend\ProductController@getDetail'
+]);
+
+Route::post('product/comment', [
+    'as' => 'product.comment',
+    'uses' => 'Frontend\ProductController@comment'
+]);
+
+Route::get('sidebar/filter-price', [
+    'as' => 'sidebar.filterPrice',
+    'uses' => 'Frontend\SidebarController@filterPrice'
+]);
+
+Route::get('search', [
+    'as' => 'search',
+    'uses' => 'Frontend\HomeController@search'
+]);
+Route::get('contact', [
+    'as' => 'contact.get',
+    'uses' => 'Frontend\ContactController@getContact'
+]);
+Route::post('contact', [
+    'as' => 'contact.post',
+    'uses' => 'Frontend\ContactController@postContact'
+]);
+

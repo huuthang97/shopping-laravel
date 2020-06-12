@@ -10,7 +10,8 @@ use App\Product;
 use App\Tag;
 use App\ProductImage;
 use App\Traits\StorageImageTrait;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AdminProductController extends Controller
 {
@@ -40,11 +41,13 @@ class AdminProductController extends Controller
     }
 
     public function store(ProductAddRequest $request) {
+        
         try {
-            // DB::beginTransaction();
+            DB::beginTransaction();
             // Create Product
                 $dataProductCreate = [
                     'name' => $request->name,
+                    'slug' => Str::of($request->name)->slug('-'),
                     'price' => $request->price,
                     'content' => $request->content,
                     'user_id' => $request->user()->id,
@@ -77,12 +80,12 @@ class AdminProductController extends Controller
                     }
                     $product->tags()->attach($tagId);
                 }
-                // DB::commit();
+                DB::commit();
 
                 return redirect()->route('products.index');
 
           } catch(\Exception $e){ 
-            // DB::rollBack();
+            DB::rollBack();
             dd($e->getMessage() . '----File: ' . $e->getFile() .'----Line: ' . $e->getLine()); 
             
           }
@@ -102,6 +105,7 @@ class AdminProductController extends Controller
             // Create Product
                 $dataProductUpdate = [
                     'name' => $request->name,
+                    'slug' => Str::of($request->name)->slug('-'),
                     'price' => $request->price,
                     'content' => $request->content,
                     'user_id' => $request->user()->id,

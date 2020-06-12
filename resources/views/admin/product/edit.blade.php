@@ -86,7 +86,7 @@
                 <div class="col-md-12">
                   <div class="form-group ">
                     <label for="comment">Nội dung:</label>
-                    <textarea id=""  class="form-control" rows="5" name="content" >{{ $product->name }}</textarea>
+                    <textarea class="form-control" rows="5" name="content" >{{ $product->content }}</textarea>
                   </div>
                   <script>
                     CKEDITOR.replace( 'content' );
