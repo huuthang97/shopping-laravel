@@ -26,7 +26,7 @@
             <a href="{{ route('categories.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Categories
+                Danh mục sản phẩm
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
@@ -35,55 +35,7 @@
             <a href="{{ route('menus.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Menus
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('products.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Products
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('sliders.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Sliders
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('settings.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Settings
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('users.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Employees
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('roles.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Roles
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('permissions.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Permissions
+                Menu
               </p>
             </a>
           </li>

@@ -11,7 +11,6 @@ class Recusive {
         $this->htmlSelect = "";
     }
 
-    //$parent_id to check selected when edit form 
     function categoryRecusive($parent_id, $id = 0, $text = '') {
         $data = $this->data;
         foreach($data as $value){

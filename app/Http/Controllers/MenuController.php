@@ -17,14 +17,14 @@ class MenuController extends Controller
 
     public function index()  {
         $menus = $this->menu->latest()->paginate(5);
-        return view('admin.menus.index', compact('menus'));
+        return view('menus.index', compact('menus'));
     }
 
     public function create()  {
         $data = $this->menu->all();
         $recusive = new MenuRecusive($data);
         $option = $recusive->menuRecusiveAdd(0,'');
-        return view('admin.menus.add', compact('option'));
+        return view('menus.add', compact('option'));
     }
 
     public function store(Request $request)  {
@@ -41,7 +41,7 @@ class MenuController extends Controller
         $data = $this->menu->all();
         $recusive = new MenuRecusive($data);
         $option = $recusive->menuRecusiveAdd(0, $menu['parent_id']);
-        return view('admin.menus.edit', compact('menu', 'option'));
+        return view('menus.edit', compact('menu', 'option'));
     }
 
     public function update($id, Request $request) {

@@ -25,13 +25,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Gate::define('role_view', function ($user) {
-        //     return $user->checkPermission('role_view');
-        // });
-
-        Gate::define('role_view', 'App\Policies\RolePolicy@view');
-        Gate::define('role_add', 'App\Policies\RolePolicy@create');
-        Gate::define('role_edit', 'App\Policies\RolePolicy@update');
-        Gate::define('role_delete', 'App\Policies\RolePolicy@delete');
+        //
     }
 }
